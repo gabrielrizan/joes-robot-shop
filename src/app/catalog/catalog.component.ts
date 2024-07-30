@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IProduct } from './product.model';
+import { CartService } from '../cart.service';
 
 @Component({
   selector: 'bot-catalog',
@@ -10,13 +11,6 @@ export class CatalogComponent {
   products: any;
   filter: string = '';
 
-  getImageUrl(product: IProduct): string {
-    if (!product) {
-      return '';
-    }
-    return `assets/images/robot-parts/${product.imageName}`;
-  }
-
   getFilteredProducts() {
     return this.filter === ''
       ? this.products
@@ -24,8 +18,11 @@ export class CatalogComponent {
           (product: any) => product.category === this.filter
         );
   }
+  addToCart(product: IProduct) {
+    this.cartService.add(product);
+  }
 
-  constructor() {
+  constructor(private cartService: CartService) {
     this.products = [
       {
         id: 1,
