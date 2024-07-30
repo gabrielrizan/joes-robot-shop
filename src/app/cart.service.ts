@@ -7,10 +7,10 @@ import { IProduct } from './catalog/product.model';
 export class CartService {
   cart: IProduct[] = [];
 
+  constructor() {}
+
   add(product: IProduct) {
     this.cart.push(product);
     console.log('Added to cart:', product);
   }
-
-  constructor() {}
 }
